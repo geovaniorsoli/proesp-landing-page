@@ -1,10 +1,14 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Poppins } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400', '700'], // Escolha os pesos que vai usar
+  variable: '--font-poppins', // Cria uma variável CSS
+});
 
 export const metadata: Metadata = {
   title: 'PROESP - Associação Protetora da Diversidades das Espécies',
@@ -36,7 +40,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className="font-sans antialiased">
+      <body className={poppins.className}>
         {children}
         <Analytics />
       </body>

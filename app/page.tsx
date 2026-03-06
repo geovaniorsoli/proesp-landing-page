@@ -50,7 +50,7 @@ function Navbar() {
     <nav
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled ? "bg-white/90 backdrop-blur-md shadow-lg" : "bg-transparent"
+        isScrolled ? "bg-white/70 backdrop-blur-md" : "bg-transparent"
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -65,8 +65,7 @@ function Navbar() {
             <button
               onClick={() => scrollToSection("historia")}
               className={cn(
-                "font-medium transition-colors hover:text-[#12A150]",
-                isScrolled ? "text-gray-700" : "text-white"
+                "font-medium transition-colors text-gray-900 hover:text-[#12A150]",
               )}
             >
               História
@@ -74,8 +73,7 @@ function Navbar() {
             <button
               onClick={() => scrollToSection("estatuto")}
               className={cn(
-                "font-medium transition-colors hover:text-[#12A150]",
-                isScrolled ? "text-gray-700" : "text-white"
+                "font-medium transition-colors text-gray-900 hover:text-[#12A150]",
               )}
             >
               Estatuto
@@ -83,8 +81,7 @@ function Navbar() {
             <button
               onClick={() => scrollToSection("diretoria")}
               className={cn(
-                "font-medium transition-colors hover:text-[#12A150]",
-                isScrolled ? "text-gray-700" : "text-white"
+                "font-medium transition-colors text-gray-900 hover:text-[#12A150]",
               )}
             >
               Diretoria
@@ -92,8 +89,7 @@ function Navbar() {
             <button
               onClick={() => scrollToSection("projetos")}
               className={cn(
-                "font-medium transition-colors hover:text-[#12A150]",
-                isScrolled ? "text-gray-700" : "text-white"
+                "font-medium transition-colors text-gray-900 hover:text-[#12A150]",
               )}
             >
               Projetos
@@ -168,36 +164,30 @@ function HeroSection() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div
-        className="absolute inset-0 bg-cover bg-center rounded-[30px] mx-4 my-4"
+        className="absolute inset-0 bg-cover bg-center rounded-[60px] mx-20 my-20"
         style={{
           backgroundImage: `url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2560&auto=format&fit=crop')`,
         }}
       >
-        <div className="absolute inset-0 bg-black/60 rounded-[30px]" />
+        <div className="absolute inset-0 bg-black/60 rounded-[60px]" />
       </div>
 
       {/* Content */}
-      <div
-        ref={ref}
-        className={cn(
-          "relative z-10 text-center px-4 max-w-4xl mx-auto transition-all duration-1000",
-          isIntersecting ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-        )}
-      >
-        <p className="text-white text-lg md:text-xl mb-4 animate-in fade-in slide-in-from-bottom duration-700">
-          Associação Protetora da Diversidades das Espécies (PROESP)
-        </p>
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-[#12A150] leading-tight animate-in fade-in slide-in-from-bottom duration-1000 delay-300">
-          O Proteger com Natureza e União
-        </h1>
-      </div>
+    <div
+    ref={ref}
+    className={cn(
+    "relative z-10 text-left max-w-5xl transition-all duration-1000",
+    isIntersecting ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+  )}
+  >
+  <p className="text-white text-lg md:text-xl mb-4 animate-in fade-in slide-in-from-right duration-700">
+    Associação Protetora da Diversidades das Espécies (PROESP)
+  </p>
+  <h1 className="text-4xl md:text-6xl lg:text-6xl font-bold text-[#12A150] leading-tight animate-in fade-in slide-in-from-right duration-1000 delay-300">
+    O Proteger com Natureza e União
+  </h1>
+  </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-white rounded-full flex items-start justify-center p-2">
-          <div className="w-1 h-2 bg-white rounded-full animate-pulse" />
-        </div>
-      </div>
     </section>
   )
 }
@@ -208,18 +198,18 @@ function AboutSection() {
   const cards = [
     {
       icon: Leaf,
-      title: "Preservação",
-      description: "Trabalhamos na preservação de espécies nativas e recuperação de áreas degradadas.",
+      title: "47",
+      description: "Anos",
     },
     {
       icon: Users,
-      title: "Educação",
-      description: "Promovemos educação ambiental em escolas e comunidades para conscientização ecológica.",
+      title: "1000+",
+      description: "Voluntários mobilizados",
     },
     {
       icon: TreePine,
-      title: "Reflorestamento",
-      description: "Realizamos projetos de plantio de árvores nativas para restauração de ecossistemas.",
+      title: "50mil+",
+      description: "Mudas Plantadas",
     },
   ]
 
@@ -229,33 +219,40 @@ function AboutSection() {
         <h2
           ref={ref}
           className={cn(
-            "text-3xl md:text-4xl font-bold text-center text-[#2B1770] mb-16 transition-all duration-700",
+            "text-3xl md:text-4xl font-bold text-center text-[#27272A] mb-16 transition-all duration-700",
             isIntersecting ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           )}
         >
           Sobre a PROESP
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {cards.map((card, index) => (
-            <Card
-              key={card.title}
-              className={cn(
-                "bg-[#D1F4E0] border-none shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2",
-                isIntersecting ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-              )}
-              style={{ transitionDelay: `${index * 200}ms` }}
-            >
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 bg-[#12A150] rounded-full flex items-center justify-center mx-auto mb-6">
-                  <card.icon className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-[#0E793C] mb-4">{card.title}</h3>
-                <p className="text-[#0E793C]">{card.description}</p>
-              </CardContent>
-            </Card>
-          ))}
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 max-w-5xl mx-auto">
+  {cards.map((card, index) => (
+    <Card
+      key={card.title}
+      className={cn(
+        "bg-[#D1F4E0] border-none rounded-[40px] transition-all duration-500",
+        "aspect-square flex flex-col items-center justify-center", 
+        isIntersecting ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      )}
+      style={{ transitionDelay: `${index * 200}ms` }}
+    >
+      <CardContent className="p-6 md:p-8 text-center flex flex-col items-center justify-center h-full w-full">
+        <div className="w-12 h-12 md:w-16 md:h-16 flex items-center justify-center mx-auto mb-4 shrink-0">
+          <card.icon className="h-25 w-25 md:h-8 md:h-8 text-[#0E793C]" />
         </div>
+        
+        <h3 className="text-2xl md:text-5xl font-bold text-[#0E793C] mb-2 leading-tight">
+          {card.title}
+        </h3>
+        
+        <p className="text-[#0E793C] text-sm md:text-base line-clamp-3">
+          {card.description}
+        </p>
+      </CardContent>
+    </Card>
+  ))}
+</div>
       </div>
     </section>
   )
@@ -340,26 +337,26 @@ function DiretoriaSection() {
 function ProjectsSection() {
   const projects = [
     {
-      title: "Preservação de Nascentes",
-      description: "Projeto dedicado à proteção e recuperação de nascentes de água em áreas rurais, garantindo água limpa para comunidades e ecossistemas.",
+      title: "Plantio de Mudas",
+      description: "Recuperação de áreas degradadas com espécies nativas da Mata Atlântica",
       image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&h=400&fit=crop",
     },
     {
-      title: "Educação Ambiental nas Escolas",
-      description: "Levamos conhecimento sobre meio ambiente e sustentabilidade para escolas públicas, formando cidadãos conscientes desde cedo.",
+      title: "Educação Ambiental",
+      description: "Programas educativos para escolas e comunidades sobre preservação ambiental",
       image: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=600&h=400&fit=crop",
     },
     {
-      title: "Reflorestamento Comunitário",
-      description: "Envolvemos comunidades locais no plantio de árvores nativas, criando florestas urbanas e corredores ecológicos.",
+      title: "Defesa de Matas Nativas",
+      description: "Monitoramento e proteção da Mata de Santa Genebra e outras áreas de preservação",
       image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=600&h=400&fit=crop",
     },
   ]
 
   return (
-    <section id="projetos" className="py-20 px-4 bg-gray-50">
+    <section id="projetos" className="py-20 px-4 bg-green-50">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-[#2B1770] mb-16">
+        <h2 className="text-3xl md:text-4xl font-bold text-center text-[#27272A] mb-16">
           Projetos
         </h2>
 
@@ -389,16 +386,15 @@ function ProjectItem({ project, isEven }: { project: { title: string; descriptio
         isIntersecting ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
       )}
     >
-      <div className="md:w-1/2">
+      <div className="md:w-2/3">
         <img
           src={project.image}
           alt={project.title}
-          className="rounded-2xl shadow-lg w-full h-64 md:h-80 object-cover hover:scale-105 transition-transform duration-500"
-        />
+          className="rounded-[32px] w-full aspect-square object-cover hover:scale-102 transition-transform duration-500"        />
       </div>
-      <div className="md:w-1/2 text-center md:text-left">
-        <h3 className="text-2xl font-bold text-[#2B1770] mb-4">{project.title}</h3>
-        <p className="text-gray-600 text-lg">{project.description}</p>
+      <div className="md:w-2/2 text-center md:text-left">
+        <h1 className="text-4xl font-bold text-[#095028] mb-2">{project.title}</h1>
+        <p className="text-gray-500 text-lg w-100">{project.description}</p>
       </div>
     </div>
   )
@@ -417,7 +413,7 @@ function DonationSection() {
 
   return (
     <section id="doar" className="py-20 px-4 bg-white">
-      <div className="max-w-3xl mx-auto text-center">
+      <div className="max-w-3xl mx-auto text-left">
         <div
           ref={ref}
           className={cn(
@@ -428,15 +424,14 @@ function DonationSection() {
           <h2 className="text-3xl md:text-4xl font-bold text-[#F31260] mb-4">
             Apoie Nossa Causa
           </h2>
-          <p className="text-[#F31260] text-lg mb-12">
+          <p className="text-[#F871A0] text-lg mb-5">
             Sua doação ajuda a manter nossos projetos de preservação ambiental e educação ecológica.
           </p>
 
-          <Card className="bg-gradient-to-br from-[#D1F4E0] to-[#B8E8CC] border-none shadow-xl">
+          <Card className="bg-[#F4F4F5] border-[#D4D4D8]">
             <CardContent className="p-8">
               <div className="flex items-center justify-center gap-2 mb-4">
-                <Heart className="h-6 w-6 text-[#F31260] animate-pulse" />
-                <span className="text-xl font-bold text-[#2B1770]">Doe via PIX</span>
+                <span className="text-xl font-bold text-[#08BFB1]">Chave PIX</span>
               </div>
               
               <div className="bg-white rounded-xl p-4 flex items-center justify-between gap-4">
@@ -448,8 +443,8 @@ function DonationSection() {
                   className={cn(
                     "transition-all duration-300",
                     copied
-                      ? "bg-[#12A150] hover:bg-[#0E793C]"
-                      : "bg-[#2B1770] hover:bg-[#1a0e45]"
+                      ? "bg-[#095028]"
+                      : "bg-[#12A150] hover:bg-[#095028]"
                   )}
                 >
                   {copied ? (
@@ -745,8 +740,8 @@ export default function Home() {
       <Navbar />
       <HeroSection />
       <AboutSection />
-      <EstatutoSection />
-      <DiretoriaSection />
+      {/* <EstatutoSection /> */}
+      {/* <DiretoriaSection /> */}
       <ProjectsSection />
       <DonationSection />
       <VolunteerForm />
