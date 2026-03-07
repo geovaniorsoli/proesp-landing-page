@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { cn } from "@/lib/utils"
+import Footer from "@/components/FooterPage"
 
 function useIntersectionObserver(options?: IntersectionObserverInit) {
   const [isIntersecting, setIsIntersecting] = useState(false)
@@ -56,7 +57,7 @@ function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           <div className="flex items-center gap-2">
-            <Leaf className="h-8 w-8 text-[#12A150]" />
+            <img src="/icon.png"/>
             <span className="text-xl md:text-2xl font-bold text-[#2B1770]">PROESP</span>
           </div>
 
@@ -166,27 +167,27 @@ function HeroSection() {
       <div
         className="absolute inset-0 bg-cover bg-center rounded-[60px] mx-20 my-20"
         style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2560&auto=format&fit=crop')`,
+          backgroundImage: `url('/hero.png')`,
         }}
       >
         <div className="absolute inset-0 bg-black/60 rounded-[60px]" />
       </div>
 
       {/* Content */}
-    <div
-    ref={ref}
-    className={cn(
-    "relative z-10 text-left max-w-5xl transition-all duration-1000",
-    isIntersecting ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-  )}
-  >
-  <p className="text-white text-lg md:text-xl mb-4 animate-in fade-in slide-in-from-right duration-700">
-    Associação Protetora da Diversidades das Espécies (PROESP)
-  </p>
-  <h1 className="text-4xl md:text-6xl lg:text-6xl font-bold text-[#12A150] leading-tight animate-in fade-in slide-in-from-right duration-1000 delay-300">
-    O Proteger com Natureza e União
-  </h1>
-  </div>
+      <div
+        ref={ref}
+        className={cn(
+          "relative z-10 text-left max-w-5xl transition-all duration-1000",
+          isIntersecting ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+        )}
+      >
+        <p className="text-white text-lg md:text-xl mb-4 animate-in fade-in duration-700">
+          Associação Protetora da Diversidades das Espécies (PROESP)
+        </p>
+        <h1 className="text-4xl md:text-6xl lg:text-6xl font-bold text-[#12A150] leading-tight animate-in fade-in duration-1000 delay-300">
+          O Proteger com Natureza e União
+        </h1>
+      </div>
 
     </section>
   )
@@ -197,17 +198,17 @@ function AboutSection() {
 
   const cards = [
     {
-      icon: Leaf,
+      icon: "calendar_month",
       title: "47",
       description: "Anos",
     },
     {
-      icon: Users,
+      icon: "account_circle",
       title: "1000+",
       description: "Voluntários mobilizados",
     },
     {
-      icon: TreePine,
+      icon: "forest",
       title: "50mil+",
       description: "Mudas Plantadas",
     },
@@ -226,33 +227,35 @@ function AboutSection() {
           Sobre a PROESP
         </h2>
 
-<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 max-w-5xl mx-auto">
-  {cards.map((card, index) => (
-    <Card
-      key={card.title}
-      className={cn(
-        "bg-[#D1F4E0] border-none rounded-[40px] transition-all duration-500",
-        "aspect-square flex flex-col items-center justify-center", 
-        isIntersecting ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-      )}
-      style={{ transitionDelay: `${index * 200}ms` }}
-    >
-      <CardContent className="p-6 md:p-8 text-center flex flex-col items-center justify-center h-full w-full">
-        <div className="w-12 h-12 md:w-16 md:h-16 flex items-center justify-center mx-auto mb-4 shrink-0">
-          <card.icon className="h-25 w-25 md:h-8 md:h-8 text-[#0E793C]" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 max-w-5xl mx-auto">
+          {cards.map((card, index) => (
+            <Card
+              key={card.title}
+              className={cn(
+                "bg-[#D1F4E0] border-none rounded-[40px] transition-all duration-500",
+                "aspect-square flex flex-col items-center justify-center",
+                isIntersecting ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              )}
+              style={{ transitionDelay: `${index * 200}ms` }}
+            >
+              <CardContent className="p-6 md:p-8 text-center flex flex-col items-center justify-center h-full w-full">
+                <div className="w-12 h-12 md:w-16 md:h-16 flex items-center justify-center mx-auto mb-4 shrink-0">
+                  <span className="material-symbols-outlined text-[#0E793C] !text-5xl">
+                    {card.icon}
+                  </span>
+                </div>
+
+                <h3 className="text-2xl md:text-5xl font-bold text-[#0E793C] mb-2 leading-tight">
+                  {card.title}
+                </h3>
+
+                <p className="text-[#0E793C] text-sm md:text-base line-clamp-3">
+                  {card.description}
+                </p>
+              </CardContent>
+            </Card>
+          ))}
         </div>
-        
-        <h3 className="text-2xl md:text-5xl font-bold text-[#0E793C] mb-2 leading-tight">
-          {card.title}
-        </h3>
-        
-        <p className="text-[#0E793C] text-sm md:text-base line-clamp-3">
-          {card.description}
-        </p>
-      </CardContent>
-    </Card>
-  ))}
-</div>
       </div>
     </section>
   )
@@ -339,17 +342,17 @@ function ProjectsSection() {
     {
       title: "Plantio de Mudas",
       description: "Recuperação de áreas degradadas com espécies nativas da Mata Atlântica",
-      image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&h=400&fit=crop",
+      image: "/plantando.png",
     },
     {
       title: "Educação Ambiental",
       description: "Programas educativos para escolas e comunidades sobre preservação ambiental",
-      image: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=600&h=400&fit=crop",
+      image: "/educacao.png",
     },
     {
       title: "Defesa de Matas Nativas",
       description: "Monitoramento e proteção da Mata de Santa Genebra e outras áreas de preservação",
-      image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=600&h=400&fit=crop",
+      image: "/arvore.png",
     },
   ]
 
@@ -390,7 +393,7 @@ function ProjectItem({ project, isEven }: { project: { title: string; descriptio
         <img
           src={project.image}
           alt={project.title}
-          className="rounded-[32px] w-full aspect-square object-cover hover:scale-102 transition-transform duration-500"        />
+          className="rounded-[32px] w-full aspect-square object-cover hover:scale-102 transition-transform duration-500" />
       </div>
       <div className="md:w-2/2 text-center md:text-left">
         <h1 className="text-4xl font-bold text-[#095028] mb-2">{project.title}</h1>
@@ -421,23 +424,36 @@ function DonationSection() {
             isIntersecting ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           )}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-[#F31260] mb-4">
-            Apoie Nossa Causa
-          </h2>
-          <p className="text-[#F871A0] text-lg mb-5">
-            Sua doação ajuda a manter nossos projetos de preservação ambiental e educação ecológica.
-          </p>
 
-          <Card className="bg-[#F4F4F5] border-[#D4D4D8]">
-            <CardContent className="p-8">
+          <div className="flex items-center justify-center gap-6">
+            <div className="flex items-center justify-center w-16 h-16 bg-[#FFE4E6] rounded-full shrink-0">
+              <span className="material-symbols-outlined text-[#F31260] text-3xl">
+                volunteer_activism
+              </span>
+            </div>
+
+            {/* Coluna 2: Textos */}
+            <div className="flex flex-col">
+              <h2 className="text-3xl md:text-4xl font-bold text-[#F31260] mb-1">
+                Apoie Nossa Causa
+              </h2>
+              <p className="text-[#F871A0] text-small w-100%">
+                Sua doação ajuda a manter nossos projetos de preservação ambiental.
+              </p>
+            </div>
+          </div>
+
+
+          <Card className="mt-[60px] bg-[#F4F4F5] border-[#D4D4D8]">
+            <CardContent className="p-6">
               <div className="flex items-center justify-center gap-2 mb-4">
-                <span className="text-xl font-bold text-[#08BFB1]">Chave PIX</span>
+                <span className="text-xl font-bold text-[#27272A]">Chave PIX</span>
               </div>
-              
+
               <div className="bg-white rounded-xl p-4 flex items-center justify-between gap-4">
-                <code className="text-sm md:text-base text-[#2B1770] font-mono flex-1 truncate">
+                <p className="text-sm font-bold md:text-base text-[#27272A] flex-1">
                   {pixKey}
-                </code>
+                </p>
                 <Button
                   onClick={handleCopy}
                   className={cn(
@@ -525,7 +541,7 @@ function VolunteerForm() {
 
   const handleChange = (field: keyof typeof formData, value: string) => {
     let formattedValue = value
-    
+
     if (field === "telefone") {
       formattedValue = formatTelefone(value)
     }
@@ -554,7 +570,7 @@ function VolunteerForm() {
 
   const handleBlur = (field: keyof typeof formData) => {
     setTouched((prev) => ({ ...prev, [field]: true }))
-    
+
     let error = ""
     switch (field) {
       case "nome":
@@ -584,14 +600,14 @@ function VolunteerForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     const newErrors = {
       nome: validateNome(formData.nome),
       email: validateEmail(formData.email),
       telefone: validateTelefone(formData.telefone),
       mensagem: validateMensagem(formData.mensagem),
     }
-    
+
     setErrors(newErrors)
     setTouched({ nome: true, email: true, telefone: true, mensagem: true })
 
@@ -603,7 +619,7 @@ function VolunteerForm() {
   }
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-br from-[#2B1770] to-[#1a0e45]">
+    <section className="py-20 px-4 bg-[#F4F4F5]">
       <div className="max-w-2xl mx-auto">
         <div
           ref={ref}
@@ -612,18 +628,18 @@ function VolunteerForm() {
             isIntersecting ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           )}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-[#27272A] mb-4">
             Seja um Voluntário
           </h2>
-          <p className="text-white/80 text-center mb-12">
+          <p className="text-[#71717A] text-center mb-12">
             Junte-se a nós na missão de proteger a natureza
           </p>
 
-          <Card className="bg-white/10 backdrop-blur-md border-white/20">
+          <Card className="bg-white">
             <CardContent className="p-8">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label className="block text-white mb-2 font-medium">Nome *</label>
+                  <label className="block text-[#27272A] mb-2">Nome</label>
                   <Input
                     type="text"
                     value={formData.nome}
@@ -631,7 +647,6 @@ function VolunteerForm() {
                     onBlur={() => handleBlur("nome")}
                     placeholder="Seu nome completo"
                     className={cn(
-                      "bg-white/20 border-white/30 text-white placeholder:text-white/50 focus:border-[#12A150]",
                       errors.nome && touched.nome && "border-[#F31260] focus:border-[#F31260]"
                     )}
                   />
@@ -641,7 +656,7 @@ function VolunteerForm() {
                 </div>
 
                 <div>
-                  <label className="block text-white mb-2 font-medium">E-mail *</label>
+                  <label className="block text-[#27272A] mb-2">E-mail</label>
                   <Input
                     type="email"
                     value={formData.email}
@@ -649,7 +664,6 @@ function VolunteerForm() {
                     onBlur={() => handleBlur("email")}
                     placeholder="seu@email.com"
                     className={cn(
-                      "bg-white/20 border-white/30 text-white placeholder:text-white/50 focus:border-[#12A150]",
                       errors.email && touched.email && "border-[#F31260] focus:border-[#F31260]"
                     )}
                   />
@@ -659,7 +673,7 @@ function VolunteerForm() {
                 </div>
 
                 <div>
-                  <label className="block text-white mb-2 font-medium">Telefone *</label>
+                  <label className="block text-[#27272A] mb-2 font-medium">Telefone</label>
                   <Input
                     type="tel"
                     value={formData.telefone}
@@ -667,7 +681,6 @@ function VolunteerForm() {
                     onBlur={() => handleBlur("telefone")}
                     placeholder="(00) 00000-0000"
                     className={cn(
-                      "bg-white/20 border-white/30 text-white placeholder:text-white/50 focus:border-[#12A150]",
                       errors.telefone && touched.telefone && "border-[#F31260] focus:border-[#F31260]"
                     )}
                   />
@@ -677,7 +690,7 @@ function VolunteerForm() {
                 </div>
 
                 <div>
-                  <label className="block text-white mb-2 font-medium">Como gostaria de ajudar? *</label>
+                  <label className="block text-[#27272A] mb-2 font-medium">Como gostaria de ajudar?</label>
                   <Textarea
                     value={formData.mensagem}
                     onChange={(e) => handleChange("mensagem", e.target.value)}
@@ -685,7 +698,6 @@ function VolunteerForm() {
                     placeholder="Descreva como você gostaria de contribuir com a PROESP..."
                     rows={4}
                     className={cn(
-                      "bg-white/20 border-white/30 text-white placeholder:text-white/50 focus:border-[#12A150] resize-none",
                       errors.mensagem && touched.mensagem && "border-[#F31260] focus:border-[#F31260]"
                     )}
                   />
@@ -696,15 +708,13 @@ function VolunteerForm() {
 
                 <Button
                   type="submit"
+                  variant={"default"}
                   disabled={!isFormValid()}
                   className={cn(
-                    "w-full py-6 text-lg font-bold rounded-full transition-all duration-300",
-                    isFormValid()
-                      ? "bg-[#12A150] hover:bg-[#0E793C] text-white hover:scale-105"
-                      : "bg-gray-400 text-gray-200 cursor-not-allowed"
+                    "w-full py-6 bg-[#12A150] text-lg font-bold rounded-full transition-all duration-300",
                   )}
                 >
-                  Quero ser voluntário
+                  Quero ser voluntário!
                 </Button>
               </form>
             </CardContent>
@@ -715,24 +725,6 @@ function VolunteerForm() {
   )
 }
 
-function Footer() {
-  return (
-    <footer className="bg-[#1a0e45] py-12 px-4">
-      <div className="max-w-7xl mx-auto text-center">
-        <div className="flex items-center justify-center gap-2 mb-4">
-          <Leaf className="h-8 w-8 text-[#12A150]" />
-          <span className="text-2xl font-bold text-white">PROESP</span>
-        </div>
-        <p className="text-white/60 mb-6">
-          Associação Protetora da Diversidades das Espécies
-        </p>
-        <p className="text-white/40 text-sm">
-          © {new Date().getFullYear()} PROESP. Todos os direitos reservados.
-        </p>
-      </div>
-    </footer>
-  )
-}
 
 export default function Home() {
   return (

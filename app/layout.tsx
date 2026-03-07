@@ -6,7 +6,7 @@ import './globals.css'
 
 const poppins = Poppins({
   subsets: ['latin'],
-  weight: ['400', '700'], // Escolha os pesos que vai usar
+  weight: ['500', '700'], // Escolha os pesos que vai usar
   variable: '--font-poppins', // Cria uma variável CSS
 });
 
@@ -41,6 +41,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={poppins.className}>
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
         {children}
         <Analytics />
       </body>
