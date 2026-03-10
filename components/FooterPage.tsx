@@ -8,8 +8,8 @@ export default function Footer() {
             <div className="bg-[#F4F4F5] rounded-2xl pt-20 pb-8 px-6 md:px-12 lg:px-20 max-w-[1400px] mx-auto">
 
                 {/* NOME DA ORG GIGANTE */}
-                <div className="flex justify-center mb-16 md:mb-24">
-                    <h2 className="text-6xl md:text-4xl lg:text-[5rem] font-bold tracking-tighter text-[#17C964] leading-none">
+                <div className="flex justify-center mb-10 md:mb-24 px-4">
+                    <h2 className="text-4xl sm:text-4xl md:text-5xl lg:text-7xl font-bold tracking-tighter text-[#17C964] leading-tight text-center">
                         Associação Protetora da Diversidades das Espécies PROESP
                     </h2>
                 </div>
@@ -60,12 +60,12 @@ export default function Footer() {
                         <p
                             className="text-gray-600 text-sm md:text-base flex items-center"
                         >
-                            PRESIDENTE: Roseli Buzanelli Torres <br/>
-                            VICE PRESIDENTE: Vitor Hugo Penedo <br/>
-                            SECRETÁRIA: Ernestina Gomes de Oliveira <br/>
-                            2º. SECRETÁRIO: Tiago Fernandes de Lira <br/>
-                            TESOUREIRO: José Antônio de Oliveira <br/>
-                            2º. TESOUREIRO: Giovana Guarizzo <br/>
+                            PRESIDENTE: Roseli Buzanelli Torres <br />
+                            VICE PRESIDENTE: Vitor Hugo Penedo <br />
+                            SECRETÁRIA: Ernestina Gomes de Oliveira <br />
+                            2º. SECRETÁRIO: Tiago Fernandes de Lira <br />
+                            TESOUREIRO: José Antônio de Oliveira <br />
+                            2º. TESOUREIRO: Giovana Guarizzo <br />
                         </p>
                     </div>
 
@@ -73,15 +73,6 @@ export default function Footer() {
 
                 {/* RODAPÉ INFERIOR (Links e Créditos) */}
                 <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-6 mt-8 text-sm text-gray-500">
-
-                    {/* Links de navegação (Opcional, preenchi como na imagem) */}
-                    <ul className="flex flex-wrap justify-center gap-4 md:gap-6">
-                        <li><a href="#sobre" className="hover:text-gray-900 transition-colors">Sobre</a></li>
-                        <li><a href="#projetos" className="hover:text-gray-900 transition-colors">Projetos</a></li>
-                        <li><a href="#doacao" className="hover:text-gray-900 transition-colors">Apoie</a></li>
-                        <li><a href="#doacao" className="hover:text-gray-900 transition-colors">Seja Volunatário</a></li>
-
-                    </ul>
 
                     {/* Seus créditos */}
                     <p className="text-center md:text-right">

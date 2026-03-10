@@ -8,6 +8,17 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { cn } from "@/lib/utils"
 import Footer from "@/components/FooterPage"
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
+
 
 function useIntersectionObserver(options?: IntersectionObserverInit) {
   const [isIntersecting, setIsIntersecting] = useState(false)
@@ -48,113 +59,91 @@ function Navbar() {
   }
 
   return (
-    <nav
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled ? "bg-white/70 backdrop-blur-md" : "bg-transparent"
-      )}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          <div className="flex items-center gap-2">
-            <img src="/icon.png"/>
-            <span className="text-xl md:text-2xl font-bold text-[#2B1770]">PROESP</span>
-          </div>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-8">
-            <button
-              onClick={() => scrollToSection("historia")}
-              className={cn(
-                "font-medium transition-colors text-gray-900 hover:text-[#12A150]",
-              )}
-            >
-              História
-            </button>
-            <button
-              onClick={() => scrollToSection("estatuto")}
-              className={cn(
-                "font-medium transition-colors text-gray-900 hover:text-[#12A150]",
-              )}
-            >
-              Estatuto
-            </button>
-            <button
-              onClick={() => scrollToSection("diretoria")}
-              className={cn(
-                "font-medium transition-colors text-gray-900 hover:text-[#12A150]",
-              )}
-            >
-              Diretoria
-            </button>
-            <button
-              onClick={() => scrollToSection("projetos")}
-              className={cn(
-                "font-medium transition-colors text-gray-900 hover:text-[#12A150]",
-              )}
-            >
-              Projetos
-            </button>
-            <Button
-              onClick={() => scrollToSection("doar")}
-              className="bg-[#12A150] hover:bg-[#0E793C] text-white rounded-full px-6"
-            >
-              Seja voluntário/Doar
-            </Button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? (
-              <X className={cn("h-6 w-6", isScrolled ? "text-gray-700" : "text-white")} />
-            ) : (
-              <Menu className={cn("h-6 w-6", isScrolled ? "text-gray-700" : "text-white")} />
-            )}
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden bg-white rounded-lg shadow-lg p-4 mb-4 animate-in slide-in-from-top duration-300">
-            <div className="flex flex-col gap-4">
-              <button
-                onClick={() => scrollToSection("historia")}
-                className="text-gray-700 font-medium py-2 hover:text-[#12A150]"
-              >
-                História
-              </button>
-              <button
-                onClick={() => scrollToSection("estatuto")}
-                className="text-gray-700 font-medium py-2 hover:text-[#12A150]"
-              >
-                Estatuto
-              </button>
-              <button
-                onClick={() => scrollToSection("diretoria")}
-                className="text-gray-700 font-medium py-2 hover:text-[#12A150]"
-              >
-                Diretoria
-              </button>
-              <button
-                onClick={() => scrollToSection("projetos")}
-                className="text-gray-700 font-medium py-2 hover:text-[#12A150]"
-              >
-                Projetos
-              </button>
-              <Button
-                onClick={() => scrollToSection("doar")}
-                className="bg-[#12A150] hover:bg-[#0E793C] text-white rounded-full"
-              >
-                Seja voluntário/Doar
-              </Button>
-            </div>
-          </div>
-        )}
+   <nav className={cn(
+    "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+    isScrolled ? "bg-white/70 backdrop-blur-md shadow-sm" : "bg-transparent"
+)}>
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="flex items-center justify-between h-16 md:h-20">
+      
+      {/* Logo */}
+      <div className="flex items-center gap-2">
+        <img src="/icon.png" className="h-8 w-8 md:h-10 md:w-10" alt="Logo" />
+        <span className={cn(
+          "text-xl md:text-2xl font-bold transition-colors",
+          isScrolled ? "text-[#2B1770]" : "text-white md:text-[#2B1770]"
+        )}>PROESP</span>
       </div>
-    </nav>
+
+      {/* Desktop Menu (Hidden on Mobile) */}
+      <div className="hidden md:flex items-center gap-8">
+        {["historia", "estatuto", "projetos"].map((item) => (
+          <button
+            key={item}
+            onClick={() => scrollToSection(item)}
+            className="font-medium capitalize text-gray-900 hover:text-[#12A150] transition-colors"
+          >
+            {item}
+          </button>
+        ))}
+        <Button onClick={() => scrollToSection("doar")} className="bg-[#12A150] hover:bg-[#0E793C] text-white rounded-full px-6">
+          Seja voluntário/Doar
+        </Button>
+      </div>
+
+      {/* Mobile Menu Button (Drawer) */}
+      <div className="md:hidden">
+        <Drawer>
+          <DrawerTrigger asChild>
+            <Button variant="ghost" size="icon" className={isScrolled ? "text-black" : "text-white"}>
+              <Menu className="h-8 w-8" /> {/* Ícone estilo Material Design */}
+            </Button>
+          </DrawerTrigger>
+          
+          <DrawerContent className="bg-white">
+            <div className="mx-auto w-full max-w-sm">
+              <DrawerHeader className="border-b">
+                <DrawerTitle className="text-[#27272A]] flex items-center gap-2">
+                  Navegação
+                </DrawerTitle>
+              </DrawerHeader>
+
+              {/* Links do Navegador dentro do Drawer */}
+              <div className="flex flex-col p-6 gap-4">
+                {["historia", "estatuto", "projetos"].map((item) => (
+                  <DrawerClose key={item} asChild>
+                    <button
+                      onClick={() => scrollToSection(item)}
+                      className="text-left text-lg font-semibold py-3 border-b border-gray-100 text-gray-700 active:text-[#12A150]"
+                    >
+                      {item.charAt(0).toUpperCase() + item.slice(1)}
+                    </button>
+                  </DrawerClose>
+                ))}
+                
+                <DrawerClose asChild>
+                  <Button 
+                    onClick={() => scrollToSection("doar")}
+                    className="w-full bg-[#F31260] text-white mt-4 h-12 text-lg rounded-xl"
+                  >
+                    Seja voluntário / Doar
+                  </Button>
+                </DrawerClose>
+              </div>
+
+              <DrawerFooter className="pt-0">
+                <DrawerClose asChild>
+                  <Button variant="outline" className="w-full">Voltar</Button>
+                </DrawerClose>
+              </DrawerFooter>
+            </div>
+          </DrawerContent>
+        </Drawer>
+      </div>
+
+    </div>
+  </div>
+</nav>
   )
 }
 
@@ -162,33 +151,38 @@ function HeroSection() {
   const { ref, isIntersecting } = useIntersectionObserver()
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
+    <section className="relative min-h-[80vh] md:min-h-screen flex items-center justify-center overflow-hidden px-6 md:px-0">
+      {/* Background Image Container */}
       <div
-        className="absolute inset-0 bg-cover bg-center rounded-[60px] mx-20 my-20"
+        className={cn(
+          "absolute inset-0 bg-cover bg-center transition-all duration-500",
+          "rounded-[30px] mx-6 my-16", // Mobile: margens pequenas e arredondamento suave
+          "md:rounded-[60px] md:mx-20 md:my-20" // Desktop: volta ao seu design original
+        )}
         style={{
           backgroundImage: `url('/hero.png')`,
         }}
       >
-        <div className="absolute inset-0 bg-black/60 rounded-[60px]" />
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/60 rounded-[30px] md:rounded-[60px]" />
       </div>
 
       {/* Content */}
       <div
         ref={ref}
         className={cn(
-          "relative z-10 text-left max-w-5xl transition-all duration-1000",
+          "relative z-10 w-full max-w-5xl transition-all duration-1000",
+          "text-center md:text-left", // Centraliza no mobile para melhor leitura
           isIntersecting ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         )}
       >
-        <p className="text-white text-lg md:text-xl mb-4 animate-in fade-in duration-700">
+        <p className="text-white text-base md:text-2xl mb-4 px-4 md:px-0 opacity-90">
           Associação Protetora da Diversidades das Espécies (PROESP)
         </p>
-        <h1 className="text-4xl md:text-6xl lg:text-6xl font-bold text-[#12A150] leading-tight animate-in fade-in duration-1000 delay-300">
-          O Proteger com Natureza e União
+        <h1 className="text-4xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-[#12A150] leading-[1.1] md:leading-tight px-2 md:px-0">
+          O Proteger com <br className="hidden md:block" /> Natureza e União
         </h1>
       </div>
-
     </section>
   )
 }
@@ -396,8 +390,8 @@ function ProjectItem({ project, isEven }: { project: { title: string; descriptio
           className="rounded-[32px] w-full aspect-square object-cover hover:scale-102 transition-transform duration-500" />
       </div>
       <div className="md:w-2/2 text-center md:text-left">
-        <h1 className="text-4xl font-bold text-[#095028] mb-2">{project.title}</h1>
-        <p className="text-gray-500 text-lg w-100">{project.description}</p>
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#095028] leading-tight">{project.title}</h1>
+        <p className="text-gray-600 text-base md:text-lg leading-relaxed max-w-prose mx-auto md:mx-0">{project.description}</p>
       </div>
     </div>
   )
@@ -433,46 +427,41 @@ function DonationSection() {
             </div>
 
             {/* Coluna 2: Textos */}
-            <div className="flex flex-col">
-              <h2 className="text-3xl md:text-4xl font-bold text-[#F31260] mb-1">
+            <div className="flex flex-col items-center md:items-start text-center md:text-left px-4 md:px-0">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#F31260] mb-2 leading-tight">
                 Apoie Nossa Causa
               </h2>
-              <p className="text-[#F871A0] text-small w-100%">
+              <p className="text-[#F871A0] text-sm md:text-base max-w-md md:max-w-xl">
                 Sua doação ajuda a manter nossos projetos de preservação ambiental.
               </p>
             </div>
           </div>
 
-
-          <Card className="mt-[60px] bg-[#F4F4F5] border-[#D4D4D8]">
-            <CardContent className="p-6">
+          <Card className="mt-10 md:mt-[60px] bg-[#F4F4F5] border-[#D4D4D8] mx-4 md:mx-0">
+            <CardContent className="p-4 md:p-6">
               <div className="flex items-center justify-center gap-2 mb-4">
-                <span className="text-xl font-bold text-[#27272A]">Chave PIX</span>
+                <span className="text-lg md:text-xl font-bold text-[#27272A]">Chave PIX</span>
               </div>
 
-              <div className="bg-white rounded-xl p-4 flex items-center justify-between gap-4">
-                <p className="text-sm font-bold md:text-base text-[#27272A] flex-1">
+              {/* Container flex-col para mobile, flex-row para desktop */}
+              <div className="bg-white rounded-xl p-3 md:p-4 flex flex-col sm:flex-row items-center justify-between gap-3 md:gap-4">
+                <p className="text-xs sm:text-sm md:text-base font-bold text-[#27272A] flex-1 break-all text-center sm:text-left">
                   {pixKey}
                 </p>
+
                 <Button
                   onClick={handleCopy}
                   className={cn(
-                    "transition-all duration-300",
+                    "w-full sm:w-auto transition-all duration-300 min-w-[120px]", // w-full no mobile
                     copied
                       ? "bg-[#095028]"
                       : "bg-[#12A150] hover:bg-[#095028]"
                   )}
                 >
                   {copied ? (
-                    <>
-                      <Check className="h-4 w-4 mr-2" />
-                      Copiado!
-                    </>
+                    <><Check className="h-4 w-4 mr-2" /> Copiado!</>
                   ) : (
-                    <>
-                      <Copy className="h-4 w-4 mr-2" />
-                      Copiar
-                    </>
+                    <><Copy className="h-4 w-4 mr-2" /> Copiar</>
                   )}
                 </Button>
               </div>
