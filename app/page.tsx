@@ -336,7 +336,7 @@ function ProjectsSection() {
     {
       title: "Plantio de Mudas",
       description: "Recuperação de áreas degradadas com espécies nativas da Mata Atlântica",
-      image: "/plantando.png",
+      image: "/mudassemborda.png",
     },
     {
       title: "Educação Ambiental",
@@ -387,7 +387,7 @@ function ProjectItem({ project, isEven }: { project: { title: string; descriptio
         <img
           src={project.image}
           alt={project.title}
-          className="rounded-[32px] w-full aspect-square object-cover hover:scale-102 transition-transform duration-500" />
+          className="w-full rounded-[60px] overflow-hidden isolate aspect-square object-cover hover:scale-102 transition-transform duration-500" />
       </div>
       <div className="md:w-2/2 text-center md:text-left">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#095028] leading-tight">{project.title}</h1>
