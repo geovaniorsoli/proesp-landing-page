@@ -102,6 +102,7 @@ export default function Navbar() {
 
                                     <div className="flex flex-col p-6 gap-2">
                                         {menuItems.map((item) => (
+
                                             <DrawerClose key={item.id} asChild>
                                                 <Link
                                                     href={item.path}
@@ -112,14 +113,15 @@ export default function Navbar() {
                                             </DrawerClose>
                                         ))}
 
-                                        <DrawerClose asChild>
-                                            <Button
-                                                onClick={() => scrollToSection("doar")}
-                                                className="w-full bg-[#F31260] text-white mt-6 h-14 text-lg rounded-xl"
-                                            >
-                                                Seja voluntário / Doar
-                                            </Button>
-                                        </DrawerClose>
+                                            <DrawerClose asChild>
+                                                <Link href="/#doar" className="w-full">
+                                                    <Button
+                                                        className="w-full bg-[#F31260] hover:bg-[#D41155] text-white mt-6 h-14 text-lg rounded-xl shadow-md active:scale-[0.98] transition-all"
+                                                    >
+                                                        Seja voluntário / Doar
+                                                    </Button>
+                                                </Link>
+                                            </DrawerClose>
                                     </div>
 
                                     <DrawerFooter className="pb-8">
