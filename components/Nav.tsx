@@ -42,7 +42,7 @@ export default function Navbar() {
     }
 
     const menuItems = [
-        { name: "História", id: "história", path: "/#historia" },
+        { name: "História", id: "história", path: "/Historia" },
         { name: "Estatuto", id: "Estatuto", path: "/Estatuto" },
         { name: "Projetos", id: "projetos", path: "/#projetos" },
     ]
@@ -56,7 +56,7 @@ export default function Navbar() {
                 <div className="flex items-center justify-between h-16 md:h-20">
 
                     {/* Logo */}
-                    <div className="flex items-center gap-2 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+                    <Link href={"/"} className="flex items-center gap-2 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                         <img src="/icon.png" className="h-8 w-8 md:h-10 md:w-10" alt="Logo PROESP" />
                         <span className={cn(
                             "text-xl md:text-2xl font-bold transition-colors",
@@ -64,7 +64,7 @@ export default function Navbar() {
                         )}>
                             PROESP
                         </span>
-                    </div>
+                    </Link>
 
                     {/* Desktop Menu */}
                     <div className="hidden md:flex items-center gap-8">
