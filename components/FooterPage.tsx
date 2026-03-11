@@ -45,15 +45,15 @@ export default function Footer() {
                         </a>
 
                         <a
-                            href="mailto:proesp@preservacao.org.br"
+                            href="mailto:proesp2019.gmail.com"
                             className="text-gray-600 hover:text-[#006FEE] text-sm md:text-base transition-colors flex items-center gap-1 w-fit"
                         >
-                            proesp@preservacao.org.br <span className="text-xs">↗</span>
+                            proesp2019.gmail.com <span className="text-xs">↗</span>
                         </a>
                     </div>
 
 
-                    <div className="md:justify-self-end">
+                    {/* <div className="md:justify-self-end">
                         <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-900 mb-4">
                             DIRETORIA DO PERÍODO 2026-2028
                         </h3>
@@ -66,6 +66,14 @@ export default function Footer() {
                             2º. SECRETÁRIO: Tiago Fernandes de Lira <br />
                             TESOUREIRO: José Antônio de Oliveira <br />
                             2º. TESOUREIRO: Giovana Guarizzo <br />
+                        </p>
+                    </div> */}
+
+                    <div className="md:justify-self-end">
+                        <p
+                            className="text-gray-900 text-sm md:text-base flex items-center"
+                        >
+                            PROESP: Tradição de 49 anos da ONG com a urgência da justiça climática e o espírito comunitário de Campinas.
                         </p>
                     </div>
 

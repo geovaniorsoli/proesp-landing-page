@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { cn } from "@/lib/utils"
 import Footer from "@/components/FooterPage"
+import Nav from "@/components/Nav"
 import {
   Drawer,
   DrawerClose,
@@ -39,112 +40,6 @@ function useIntersectionObserver(options?: IntersectionObserverInit) {
   }, [options])
 
   return { ref, isIntersecting }
-}
-
-function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
-    setMobileMenuOpen(false)
-  }
-
-  return (
-   <nav className={cn(
-    "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-    isScrolled ? "bg-white/70 backdrop-blur-md shadow-sm" : "bg-transparent"
-)}>
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="flex items-center justify-between h-16 md:h-20">
-      
-      {/* Logo */}
-      <div className="flex items-center gap-2">
-        <img src="/icon.png" className="h-8 w-8 md:h-10 md:w-10" alt="Logo" />
-        <span className={cn(
-          "text-xl md:text-2xl font-bold transition-colors",
-          isScrolled ? "text-[#2B1770]" : "text-white md:text-[#2B1770]"
-        )}>PROESP</span>
-      </div>
-
-      {/* Desktop Menu (Hidden on Mobile) */}
-      <div className="hidden md:flex items-center gap-8">
-        {["historia", "estatuto", "projetos"].map((item) => (
-          <button
-            key={item}
-            onClick={() => scrollToSection(item)}
-            className="font-medium capitalize text-gray-900 hover:text-[#12A150] transition-colors"
-          >
-            {item}
-          </button>
-        ))}
-        <Button onClick={() => scrollToSection("doar")} className="bg-[#12A150] hover:bg-[#0E793C] text-white rounded-full px-6">
-          Seja voluntário/Doar
-        </Button>
-      </div>
-
-      {/* Mobile Menu Button (Drawer) */}
-      <div className="md:hidden">
-        <Drawer>
-          <DrawerTrigger asChild>
-            <Button variant="ghost" size="icon" className={isScrolled ? "text-black" : "text-white"}>
-              <Menu className="h-8 w-8" /> {/* Ícone estilo Material Design */}
-            </Button>
-          </DrawerTrigger>
-          
-          <DrawerContent className="bg-white">
-            <div className="mx-auto w-full max-w-sm">
-              <DrawerHeader className="border-b">
-                <DrawerTitle className="text-[#27272A]] flex items-center gap-2">
-                  Navegação
-                </DrawerTitle>
-              </DrawerHeader>
-
-              {/* Links do Navegador dentro do Drawer */}
-              <div className="flex flex-col p-6 gap-4">
-                {["historia", "estatuto", "projetos"].map((item) => (
-                  <DrawerClose key={item} asChild>
-                    <button
-                      onClick={() => scrollToSection(item)}
-                      className="text-left text-lg font-semibold py-3 border-b border-gray-100 text-gray-700 active:text-[#12A150]"
-                    >
-                      {item.charAt(0).toUpperCase() + item.slice(1)}
-                    </button>
-                  </DrawerClose>
-                ))}
-                
-                <DrawerClose asChild>
-                  <Button 
-                    onClick={() => scrollToSection("doar")}
-                    className="w-full bg-[#F31260] text-white mt-4 h-12 text-lg rounded-xl"
-                  >
-                    Seja voluntário / Doar
-                  </Button>
-                </DrawerClose>
-              </div>
-
-              <DrawerFooter className="pt-0">
-                <DrawerClose asChild>
-                  <Button variant="outline" className="w-full">Voltar</Button>
-                </DrawerClose>
-              </DrawerFooter>
-            </div>
-          </DrawerContent>
-        </Drawer>
-      </div>
-
-    </div>
-  </div>
-</nav>
-  )
 }
 
 function HeroSection() {
@@ -187,73 +82,73 @@ function HeroSection() {
   )
 }
 
-function AboutSection() {
-  const { ref, isIntersecting } = useIntersectionObserver()
+// function AboutSection() {
+//   const { ref, isIntersecting } = useIntersectionObserver()
 
-  const cards = [
-    {
-      icon: "calendar_month",
-      title: "47",
-      description: "Anos",
-    },
-    {
-      icon: "account_circle",
-      title: "1000+",
-      description: "Voluntários mobilizados",
-    },
-    {
-      icon: "forest",
-      title: "50mil+",
-      description: "Mudas Plantadas",
-    },
-  ]
+//   const cards = [
+//     {
+//       icon: "calendar_month",
+//       title: "47",
+//       description: "Anos",
+//     },
+//     {
+//       icon: "account_circle",
+//       title: "1000+",
+//       description: "Voluntários mobilizados",
+//     },
+//     {
+//       icon: "forest",
+//       title: "50mil+",
+//       description: "Mudas Plantadas",
+//     },
+//   ]
 
-  return (
-    <section id="historia" className="py-20 px-4 bg-white">
-      <div className="max-w-7xl mx-auto">
-        <h2
-          ref={ref}
-          className={cn(
-            "text-3xl md:text-4xl font-bold text-center text-[#27272A] mb-16 transition-all duration-700",
-            isIntersecting ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          )}
-        >
-          Sobre a PROESP
-        </h2>
+//   return (
+//     <section id="historia" className="py-20 px-4 bg-white">
+//       <div className="max-w-7xl mx-auto">
+//         <h2
+//           ref={ref}
+//           className={cn(
+//             "text-3xl md:text-4xl font-bold text-center text-[#27272A] mb-16 transition-all duration-700",
+//             isIntersecting ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+//           )}
+//         >
+//           Sobre a PROESP
+//         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 max-w-5xl mx-auto">
-          {cards.map((card, index) => (
-            <Card
-              key={card.title}
-              className={cn(
-                "bg-[#D1F4E0] border-none rounded-[40px] transition-all duration-500",
-                "aspect-square flex flex-col items-center justify-center",
-                isIntersecting ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-              )}
-              style={{ transitionDelay: `${index * 200}ms` }}
-            >
-              <CardContent className="p-6 md:p-8 text-center flex flex-col items-center justify-center h-full w-full">
-                <div className="w-12 h-12 md:w-16 md:h-16 flex items-center justify-center mx-auto mb-4 shrink-0">
-                  <span className="material-symbols-outlined text-[#0E793C] !text-5xl">
-                    {card.icon}
-                  </span>
-                </div>
+//         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 max-w-5xl mx-auto">
+//           {cards.map((card, index) => (
+//             <Card
+//               key={card.title}
+//               className={cn(
+//                 "bg-[#D1F4E0] border-none rounded-[40px] transition-all duration-500",
+//                 "aspect-square flex flex-col items-center justify-center",
+//                 isIntersecting ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+//               )}
+//               style={{ transitionDelay: `${index * 200}ms` }}
+//             >
+//               <CardContent className="p-6 md:p-8 text-center flex flex-col items-center justify-center h-full w-full">
+//                 <div className="w-12 h-12 md:w-16 md:h-16 flex items-center justify-center mx-auto mb-4 shrink-0">
+//                   <span className="material-symbols-outlined text-[#0E793C] !text-5xl">
+//                     {card.icon}
+//                   </span>
+//                 </div>
 
-                <h3 className="text-2xl md:text-5xl font-bold text-[#0E793C] mb-2 leading-tight">
-                  {card.title}
-                </h3>
+//                 <h3 className="text-2xl md:text-5xl font-bold text-[#0E793C] mb-2 leading-tight">
+//                   {card.title}
+//                 </h3>
 
-                <p className="text-[#0E793C] text-sm md:text-base line-clamp-3">
-                  {card.description}
-                </p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
+//                 <p className="text-[#0E793C] text-sm md:text-base line-clamp-3">
+//                   {card.description}
+//                 </p>
+//               </CardContent>
+//             </Card>
+//           ))}
+//         </div>
+//       </div>
+//     </section>
+//   )
+// }
 
 function EstatutoSection() {
   const { ref, isIntersecting } = useIntersectionObserver()
@@ -400,7 +295,7 @@ function ProjectItem({ project, isEven }: { project: { title: string; descriptio
 function DonationSection() {
   const [copied, setCopied] = useState(false)
   const { ref, isIntersecting } = useIntersectionObserver()
-  const pixKey = "proesp@preservacao.org.br"
+  const pixKey = "proesp2019.gmail.com"
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(pixKey)
@@ -718,9 +613,9 @@ function VolunteerForm() {
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <Navbar />
+      <Nav />
       <HeroSection />
-      <AboutSection />
+      {/* <AboutSection /> */}
       {/* <EstatutoSection /> */}
       {/* <DiretoriaSection /> */}
       <ProjectsSection />
