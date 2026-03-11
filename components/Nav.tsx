@@ -43,7 +43,7 @@ export default function Navbar() {
 
     const menuItems = [
         { name: "História", id: "história", path: "/#historia" },
-        { name: "Estatuto", id: "Estatuto", path: "/estatuto" },
+        { name: "Estatuto", id: "Estatuto", path: "/Estatuto" },
         { name: "Projetos", id: "projetos", path: "/#projetos" },
     ]
 
