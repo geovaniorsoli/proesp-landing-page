@@ -1,7 +1,8 @@
 "use client"
-
+import { useRef, useEffect, useState } from 'react'
 import React from 'react'
 import Link from 'next/link'
+import { cn } from "@/lib/utils"
 import { Card, CardContent } from "@/components/ui/card"
 import {
     Carousel,
@@ -17,7 +18,7 @@ const projetos = [
     {
         titulo: "Brigada Cachorro-do-mato",
         link: "https://www.instagram.com/brigada_cachorrodomato/?hl=pt-br",
-        imagem: "/fogo.webp", // Substitua pelas fotos reais
+        imagem: "/fogo.webp", 
     },
     {
         titulo: "Mini Pantanal de Paulínia",
@@ -31,7 +32,30 @@ const projetos = [
     }
 ]
 
+function useIntersectionObserver(options?: IntersectionObserverInit) {
+    const [isIntersecting, setIsIntersecting] = useState(false)
+    const ref = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) {
+                setIsIntersecting(true)
+            }
+        }, { threshold: 0.1, ...options })
+
+        if (ref.current) {
+            observer.observe(ref.current)
+        }
+
+        return () => observer.disconnect()
+    }, [options])
+
+    return { ref, isIntersecting }
+}
+
+
 export default function ProjetosSection() {
+    const { ref, isIntersecting } = useIntersectionObserver()
     return (
         <>
             <Navbar />
@@ -44,8 +68,15 @@ export default function ProjetosSection() {
             </section>
 
             <section id="projetos" className="py-24 bg-white">
-                <div className="max-w-7xl mx-auto px-4">
-
+                <div
+                    ref={ref}
+                    className={cn(
+                        "max-w-7xl mx-auto px-4 transition-all duration-1000 ease-out",
+                        isIntersecting
+                            ? "opacity-100 translate-y-0"
+                            : "opacity-0 translate-y-10"
+                    )}
+                >
                     <Carousel
                         opts={{
                             align: "start",
@@ -91,7 +122,7 @@ export default function ProjetosSection() {
                     </Carousel>
                 </div>
             </section>
-            <Footer/>
+            <Footer />
         </>
 
     )

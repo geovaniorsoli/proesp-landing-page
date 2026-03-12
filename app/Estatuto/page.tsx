@@ -1,11 +1,12 @@
 "use client"
 
-import React from 'react'
 import { FileText, Download, Users, ShieldCheck, Landmark, Leaf, Scale } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import Navbar from "@/components/Nav" 
+import Navbar from "@/components/Nav"
 import Footer from "@/components/FooterPage"
+import { useRef, useEffect, useState } from 'react'
+import { cn } from "@/lib/utils"
 
 export default function estatuto() {
   const diretoria = [
@@ -16,6 +17,29 @@ export default function estatuto() {
     { cargo: "TESOUREIRO", nome: "José Antônio de Oliveira" },
     { cargo: "2º. TESOUREIRO", nome: "Giovana Guarizzo" },
   ]
+
+  function useIntersectionObserver(options?: IntersectionObserverInit) {
+    const [isIntersecting, setIsIntersecting] = useState(false)
+    const ref = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+      const observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          setIsIntersecting(true)
+        }
+      }, { threshold: 0.1, ...options })
+
+      if (ref.current) {
+        observer.observe(ref.current)
+      }
+
+      return () => observer.disconnect()
+    }, [options])
+
+    return { ref, isIntersecting }
+  }
+
+  const { ref, isIntersecting } = useIntersectionObserver()
 
   return (
     <main className="min-h-screen bg-[#E8FAF0]">
@@ -34,9 +58,17 @@ export default function estatuto() {
 
       {/* Seção do Estatuto */}
       <section className="py-16 px-4 -mt-10">
-        <div className="max-w-5xl mx-auto">
+          <div
+            ref={ref}
+            className={cn(
+              "max-w-5xl mx-auto transition-all duration-1000 ease-out",
+              isIntersecting
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-10"
+            )}
+          >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
+
             {/* História */}
             <Card className="border-none   transition-shadow">
               <CardContent className="p-8">
@@ -127,9 +159,9 @@ export default function estatuto() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {diretoria.map((membro, index) => (
-              <div 
-                key={index} 
-                className="flex flex-col p-6 bg-[#F8FAFC] rounded-xl border border-gray-100 hover:border-[#17C964]/30 transition-colors"
+              <div
+                key={index}
+                className="flex flex-col p-6 bg-[#F8FAFC] rounded-xl border border-gray-100"
               >
                 <span className="text-xs font-bold text-[#12A150] uppercase tracking-widest mb-1">
                   {membro.cargo}

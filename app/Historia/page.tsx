@@ -3,6 +3,7 @@
 import React from 'react'
 import Navbar from "@/components/Nav"
 import Footer from "@/components/FooterPage"
+import { useRef, useEffect, useState } from 'react'
 
 const historiaCards = [
     {
@@ -38,6 +39,30 @@ const historiaCards = [
 ]
 
 export default function Historia() {
+
+    function useIntersectionObserver(options?: IntersectionObserverInit) {
+        const [isIntersecting, setIsIntersecting] = useState(false)
+        const ref = useRef<HTMLDivElement>(null)
+
+        useEffect(() => {
+            const observer = new IntersectionObserver(([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsIntersecting(true)
+                }
+            }, { threshold: 0.1, ...options })
+
+            if (ref.current) {
+                observer.observe(ref.current)
+            }
+
+            return () => observer.disconnect()
+        }, [options])
+
+        return { ref, isIntersecting }
+    }
+
+    const { ref, isIntersecting } = useIntersectionObserver()
+
     return (
         <main className="min-h-screen bg-white">
             <Navbar />
@@ -53,7 +78,14 @@ export default function Historia() {
 
             {/* Seção de Cards */}
             <section className="pb-20 px-4 space-y-8">
-                <div className="max-w-6xl mx-auto space-y-8">
+                <div
+                    ref={ref}
+                    className={cn(
+                        "max-w-6xl mx-auto space-y-8 duration-1000 ease-out",
+                        isIntersecting
+                            ? "opacity-100 translate-y-0"
+                            : "opacity-0 translate-y-10"
+                    )}>
                     {historiaCards.map((card, index) => (
                         <div
                             key={index}
