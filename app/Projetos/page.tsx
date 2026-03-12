@@ -1,0 +1,98 @@
+"use client"
+
+import React from 'react'
+import Link from 'next/link'
+import { Card, CardContent } from "@/components/ui/card"
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+} from "@/components/ui/carousel"
+import Navbar from '@/components/Nav'
+import Footer from '@/components/FooterPage'
+
+const projetos = [
+    {
+        titulo: "Brigada Cachorro-do-mato",
+        link: "https://www.instagram.com/brigada_cachorrodomato/?hl=pt-br",
+        imagem: "/fogo.webp", // Substitua pelas fotos reais
+    },
+    {
+        titulo: "Mini Pantanal de Paulínia",
+        link: "https://www.instagram.com/explore/locations/283500781/mini-pantanal-paulinia/",
+        imagem: "/tucano.webp",
+    },
+    {
+        titulo: "Regeneração Sítio São Francisco & Beco Mokarzel",
+        link: "https://viladasartescampinas.wordpress.com/",
+        imagem: "/souzas.jpg",
+    }
+]
+
+export default function ProjetosSection() {
+    return (
+        <>
+            <Navbar />
+            <section className="pt-32 pb-16 mb-16 bg-[#095028] text-white px-4">
+                <div className="max-w-4xl mx-auto text-center">
+                    <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+                        Projetos
+                    </h1>
+                </div>
+            </section>
+
+            <section id="projetos" className="py-24 bg-white">
+                <div className="max-w-7xl mx-auto px-4">
+
+                    <Carousel
+                        opts={{
+                            align: "start",
+                            loop: true,
+                        }}
+                        className="w-full"
+                    >
+                        <CarouselContent className="-ml-4">
+                            {projetos.map((proj, index) => (
+                                <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                                    <Link href={proj.link} target="_blank" rel="noopener noreferrer">
+                                        <Card className="border-none overflow-hidden rounded-[32px] group cursor-pointer">
+                                            <CardContent className="p-0 relative rounded-[32px] aspect-[4/5]">
+                                                {/* Imagem com Overlay */}
+                                                <img
+                                                    src={proj.imagem}
+                                                    alt={proj.titulo}
+                                                    className="absolute inset-0 w-full rounded-[32px] h-full object-cover transition-transform duration-500"
+                                                />
+                                                <div className="absolute inset-0 rounded-[32px] bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+                                                {/* Título fixo na parte inferior */}
+                                                <div className="absolute bottom-0 left-0 p-6 w-full">
+                                                    <h3 className="text-xl font-bold text-white leading-tight">
+                                                        {proj.titulo}
+                                                    </h3>
+                                                    <p className="text-[#17C964] text-sm mt-2 font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                                                        Ver detalhes no link →
+                                                    </p>
+                                                </div>
+                                            </CardContent>
+                                        </Card>
+                                    </Link>
+                                </CarouselItem>
+                            ))}
+                        </CarouselContent>
+
+                        {/* Controles do Carrossel */}
+                        <div className="flex justify-end gap-4 mt-8">
+                            <CarouselPrevious className="static translate-y-0" />
+                            <CarouselNext className="static translate-y-0" />
+                        </div>
+                    </Carousel>
+                </div>
+            </section>
+            <Footer/>
+        </>
+
+    )
+}

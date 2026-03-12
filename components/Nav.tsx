@@ -44,7 +44,7 @@ export default function Navbar() {
     const menuItems = [
         { name: "História", id: "história", path: "/Historia" },
         { name: "Estatuto", id: "Estatuto", path: "/Estatuto" },
-        { name: "Projetos", id: "projetos", path: "/#projetos" },
+        { name: "Projetos", id: "projetos", path: "/Projetos" },
     ]
 
     return (
@@ -75,12 +75,14 @@ export default function Navbar() {
                                 </button>
                             </Link>
                         ))}
-                        <Button
-                            onClick={() => scrollToSection("doar")}
-                            className="bg-[#12A150] hover:bg-[#0E793C] text-white rounded-full px-6"
-                        >
-                            Seja voluntário/Doar
-                        </Button>
+                        <Link href={"/#doar "}>
+                            <Button
+                                onClick={() => scrollToSection("doar")}
+                                className="bg-[#12A150] hover:bg-[#0E793C] text-white rounded-full px-6"
+                            >
+                                Seja voluntário/Doar
+                            </Button>
+                        </Link>
                     </div>
 
                     {/* Mobile Menu Button (Drawer) */}
@@ -113,15 +115,15 @@ export default function Navbar() {
                                             </DrawerClose>
                                         ))}
 
-                                            <DrawerClose asChild>
-                                                <Link href="/#doar" className="w-full">
-                                                    <Button
-                                                        className="w-full bg-[#F31260] hover:bg-[#D41155] text-white mt-6 h-14 text-lg rounded-xl shadow-md active:scale-[0.98] transition-all"
-                                                    >
-                                                        Seja voluntário / Doar
-                                                    </Button>
-                                                </Link>
-                                            </DrawerClose>
+                                        <DrawerClose asChild>
+                                            <Link href="/#doar" className="w-full">
+                                                <Button
+                                                    className="w-full bg-[#F31260] hover:bg-[#D41155] text-white mt-6 h-14 text-lg rounded-xl shadow-md active:scale-[0.98] transition-all"
+                                                >
+                                                    Seja voluntário / Doar
+                                                </Button>
+                                            </Link>
+                                        </DrawerClose>
                                     </div>
 
                                     <DrawerFooter className="pb-8">
@@ -136,6 +138,6 @@ export default function Navbar() {
 
                 </div>
             </div>
-        </nav>
+        </nav >
     )
 }

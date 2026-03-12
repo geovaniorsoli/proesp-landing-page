@@ -5,7 +5,7 @@ export default function Footer() {
         // O container externo dá um espaçamento para a "caixa" do footer não colar nas bordas
         <footer className="p-5 md:p-6 lg:p-8 bg-white">
             {/* A caixa principal com fundo cinza claro e bordas arredondadas igual à imagem */}
-            <div className="bg-[#F4F4F5] rounded-2xl pt-20 pb-8 px-6 md:px-12 lg:px-20 max-w-[1400px] mx-auto">
+            <div className="bg-[#F4F4F5] rounded-[32px] pt-20 pb-8 px-6 md:px-12 lg:px-20 max-w-[1400px] mx-auto">
 
                 {/* NOME DA ORG GIGANTE */}
                 <div className="flex justify-center mb-10 md:mb-24 px-4">

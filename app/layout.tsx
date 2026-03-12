@@ -13,24 +13,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: 'PROESP - Associação Protetora da Diversidades das Espécies',
   description: 'Proteger com Natureza e União - Preservação ambiental e educação ecológica',
-  generator: 'v0.app',
-  icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
-  },
+  icons: '/icon.png'
 }
 
 export default function RootLayout({
