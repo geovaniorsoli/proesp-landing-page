@@ -53,9 +53,35 @@ function useIntersectionObserver(options?: IntersectionObserverInit) {
     return { ref, isIntersecting }
 }
 
+// Componente de Card isolado para não repetir código e manter a animação
+function ProjetoCard({ proj }: { proj: typeof projetos[0] }) {
+    return (
+        <Link href={proj.link} target="_blank" rel="noopener noreferrer" className="block w-full">
+            <Card className="border-none overflow-hidden rounded-[32px] group cursor-pointer shadow-none">
+                <CardContent className="p-0 relative rounded-[32px] aspect-[4/5]">
+                    <img
+                        src={proj.imagem}
+                        alt={proj.titulo}
+                        className="absolute inset-0 w-full rounded-[32px] h-full object-cover transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 rounded-[32px] bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    <div className="absolute bottom-0 left-0 p-6 w-full">
+                        <h3 className="text-xl font-bold text-white leading-tight">
+                            {proj.titulo}
+                        </h3>
+                        <p className="text-[#17C964] text-sm mt-2 font-medium md:opacity-0 md:group-hover:opacity-100 transition-opacity">
+                            Ver detalhes no link →
+                        </p>
+                    </div>
+                </CardContent>
+            </Card>
+        </Link>
+    )
+}
 
 export default function ProjetosSection() {
     const { ref, isIntersecting } = useIntersectionObserver()
+
     return (
         <>
             <Navbar />
@@ -67,7 +93,7 @@ export default function ProjetosSection() {
                 </div>
             </section>
 
-            <section id="projetos" className="py-24 bg-white">
+            <section id="projetos" className="py-12 md:py-24 bg-white">
                 <div
                     ref={ref}
                     className={cn(
@@ -77,53 +103,38 @@ export default function ProjetosSection() {
                             : "opacity-0 translate-y-10"
                     )}
                 >
-                    <Carousel
-                        opts={{
-                            align: "start",
-                            loop: true,
-                        }}
-                        className="w-full"
-                    >
-                        <CarouselContent className="-ml-4">
-                            {projetos.map((proj, index) => (
-                                <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
-                                    <Link href={proj.link} target="_blank" rel="noopener noreferrer">
-                                        <Card className="border-none overflow-hidden rounded-[32px] group cursor-pointer">
-                                            <CardContent className="p-0 relative rounded-[32px] aspect-[4/5]">
-                                                {/* Imagem com Overlay */}
-                                                <img
-                                                    src={proj.imagem}
-                                                    alt={proj.titulo}
-                                                    className="absolute inset-0 w-full rounded-[32px] h-full object-cover transition-transform duration-500"
-                                                />
-                                                <div className="absolute inset-0 rounded-[32px] bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    {/* VERSÃO MOBILE: Lista Vertical (1 embaixo do outro) */}
+                    <div className="grid grid-cols-1 gap-8 md:hidden">
+                        {projetos.map((proj, index) => (
+                            <ProjetoCard key={`mobile-${index}`} proj={proj} />
+                        ))}
+                    </div>
 
-                                                {/* Título fixo na parte inferior */}
-                                                <div className="absolute bottom-0 left-0 p-6 w-full">
-                                                    <h3 className="text-xl font-bold text-white leading-tight">
-                                                        {proj.titulo}
-                                                    </h3>
-                                                    <p className="text-[#17C964] text-sm mt-2 font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                                                        Ver detalhes no link →
-                                                    </p>
-                                                </div>
-                                            </CardContent>
-                                        </Card>
-                                    </Link>
-                                </CarouselItem>
-                            ))}
-                        </CarouselContent>
-
-                        {/* Controles do Carrossel */}
-                        <div className="flex justify-end gap-4 mt-8">
-                            <CarouselPrevious className="static translate-y-0" />
-                            <CarouselNext className="static translate-y-0" />
-                        </div>
-                    </Carousel>
+                    {/* VERSÃO DESKTOP: Carrossel */}
+                    <div className="hidden md:block">
+                        <Carousel
+                            opts={{
+                                align: "start",
+                                loop: true,
+                            }}
+                            className="w-full"
+                        >
+                            <CarouselContent className="-ml-4">
+                                {projetos.map((proj, index) => (
+                                    <CarouselItem key={`desktop-${index}`} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                                        <ProjetoCard proj={proj} />
+                                    </CarouselItem>
+                                ))}
+                            </CarouselContent>
+                            <div className="flex justify-end gap-4 mt-8">
+                                <CarouselPrevious className="static translate-y-0" />
+                                <CarouselNext className="static translate-y-0" />
+                            </div>
+                        </Carousel>
+                    </div>
                 </div>
             </section>
             <Footer />
         </>
-
     )
 }
