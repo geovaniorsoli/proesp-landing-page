@@ -19,6 +19,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer"
+import Link from "next/link"
 
 
 function useIntersectionObserver(options?: IntersectionObserverInit) {
@@ -279,16 +280,18 @@ function ProjectItem({ project, isEven }: { project: { title: string; descriptio
       )}
     >
       <div className="md:w-2/3">
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full rounded-[60px] overflow-hidden isolate aspect-square object-cover hover:scale-102 transition-transform duration-500" />
+        <Link href="/Projetos">
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full rounded-[60px] overflow-hidden isolate aspect-square object-cover hover:scale-102 transition-transform duration-500" />
+        </Link>
       </div>
       <div className="md:w-2/2 text-center md:text-left">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#095028] leading-tight">{project.title}</h1>
         <p className="text-gray-600 text-base md:text-lg leading-relaxed max-w-prose mx-auto md:mx-0">{project.description}</p>
       </div>
-    </div>
+    </div >
   )
 }
 
