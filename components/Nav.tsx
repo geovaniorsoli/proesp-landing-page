@@ -89,7 +89,7 @@ export default function Navbar() {
                     <div className="md:hidden">
                         <Drawer>
                             <DrawerTrigger asChild>
-                                <Button variant="ghost" size="icon" className={isScrolled ? "text-black" : "text-white"}>
+                                <Button variant="ghost" size="icon" className={isScrolled ? "text-black" : "text-black"}>
                                     <Menu className="h-8 w-8" />
                                 </Button>
                             </DrawerTrigger>
