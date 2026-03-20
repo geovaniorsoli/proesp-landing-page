@@ -9,18 +9,8 @@ import { Textarea } from "@/components/ui/textarea"
 import { cn } from "@/lib/utils"
 import Footer from "@/components/FooterPage"
 import Nav from "@/components/Nav"
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer"
 import Link from "next/link"
-
+import Forms from "@/components/Forms"
 
 function useIntersectionObserver(options?: IntersectionObserverInit) {
   const [isIntersecting, setIsIntersecting] = useState(false)
@@ -371,247 +361,6 @@ function DonationSection() {
   )
 }
 
-function VolunteerForm() {
-  const { ref, isIntersecting } = useIntersectionObserver()
-  const [formData, setFormData] = useState({
-    nome: "",
-    email: "",
-    telefone: "",
-    mensagem: "",
-  })
-  const [errors, setErrors] = useState({
-    nome: "",
-    email: "",
-    telefone: "",
-    mensagem: "",
-  })
-  const [touched, setTouched] = useState({
-    nome: false,
-    email: false,
-    telefone: false,
-    mensagem: false,
-  })
-
-  const validateNome = (value: string) => {
-    if (!value.trim()) return "Nome é obrigatório"
-    if (value.trim().length < 3) return "Nome deve ter pelo menos 3 caracteres"
-    return ""
-  }
-
-  const validateEmail = (value: string) => {
-    if (!value.trim()) return "E-mail é obrigatório"
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(value)) return "E-mail inválido"
-    return ""
-  }
-
-  const validateTelefone = (value: string) => {
-    const numbers = value.replace(/\D/g, "")
-    if (!numbers) return "Telefone é obrigatório"
-    if (numbers.length < 10 || numbers.length > 11) return "Telefone inválido"
-    return ""
-  }
-
-  const validateMensagem = (value: string) => {
-    if (!value.trim()) return "Por favor, descreva como gostaria de ajudar"
-    if (value.trim().length < 10) return "Descreva com mais detalhes (mínimo 10 caracteres)"
-    return ""
-  }
-
-  const formatTelefone = (value: string) => {
-    const numbers = value.replace(/\D/g, "")
-    if (numbers.length <= 2) return numbers
-    if (numbers.length <= 6) return `(${numbers.slice(0, 2)}) ${numbers.slice(2)}`
-    if (numbers.length <= 10) return `(${numbers.slice(0, 2)}) ${numbers.slice(2, 6)}-${numbers.slice(6)}`
-    return `(${numbers.slice(0, 2)}) ${numbers.slice(2, 7)}-${numbers.slice(7, 11)}`
-  }
-
-  const handleChange = (field: keyof typeof formData, value: string) => {
-    let formattedValue = value
-
-    if (field === "telefone") {
-      formattedValue = formatTelefone(value)
-    }
-
-    setFormData((prev) => ({ ...prev, [field]: formattedValue }))
-
-    if (touched[field]) {
-      let error = ""
-      switch (field) {
-        case "nome":
-          error = validateNome(formattedValue)
-          break
-        case "email":
-          error = validateEmail(formattedValue)
-          break
-        case "telefone":
-          error = validateTelefone(formattedValue)
-          break
-        case "mensagem":
-          error = validateMensagem(formattedValue)
-          break
-      }
-      setErrors((prev) => ({ ...prev, [field]: error }))
-    }
-  }
-
-  const handleBlur = (field: keyof typeof formData) => {
-    setTouched((prev) => ({ ...prev, [field]: true }))
-
-    let error = ""
-    switch (field) {
-      case "nome":
-        error = validateNome(formData.nome)
-        break
-      case "email":
-        error = validateEmail(formData.email)
-        break
-      case "telefone":
-        error = validateTelefone(formData.telefone)
-        break
-      case "mensagem":
-        error = validateMensagem(formData.mensagem)
-        break
-    }
-    setErrors((prev) => ({ ...prev, [field]: error }))
-  }
-
-  const isFormValid = () => {
-    return (
-      !validateNome(formData.nome) &&
-      !validateEmail(formData.email) &&
-      !validateTelefone(formData.telefone) &&
-      !validateMensagem(formData.mensagem)
-    )
-  }
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-
-    const newErrors = {
-      nome: validateNome(formData.nome),
-      email: validateEmail(formData.email),
-      telefone: validateTelefone(formData.telefone),
-      mensagem: validateMensagem(formData.mensagem),
-    }
-
-    setErrors(newErrors)
-    setTouched({ nome: true, email: true, telefone: true, mensagem: true })
-
-    if (isFormValid()) {
-      alert("Obrigado por querer ser voluntário! Entraremos em contato em breve.")
-      setFormData({ nome: "", email: "", telefone: "", mensagem: "" })
-      setTouched({ nome: false, email: false, telefone: false, mensagem: false })
-    }
-  }
-
-  return (
-    <section className="py-20 px-4 bg-[#F4F4F5]">
-      <div className="max-w-2xl mx-auto">
-        <div
-          ref={ref}
-          className={cn(
-            "transition-all duration-700",
-            isIntersecting ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          )}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-[#27272A] mb-4">
-            Seja um Voluntário
-          </h2>
-          <p className="text-[#71717A] text-center mb-12">
-            Junte-se a nós na missão de proteger a natureza
-          </p>
-
-          <Card className="bg-white">
-            <CardContent className="p-8">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label className="block text-[#27272A] mb-2">Nome</label>
-                  <Input
-                    type="text"
-                    value={formData.nome}
-                    onChange={(e) => handleChange("nome", e.target.value)}
-                    onBlur={() => handleBlur("nome")}
-                    placeholder="Seu nome completo"
-                    className={cn(
-                      errors.nome && touched.nome && "border-[#F31260] focus:border-[#F31260]"
-                    )}
-                  />
-                  {errors.nome && touched.nome && (
-                    <p className="text-[#F31260] text-sm mt-1">{errors.nome}</p>
-                  )}
-                </div>
-
-                <div>
-                  <label className="block text-[#27272A] mb-2">E-mail</label>
-                  <Input
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => handleChange("email", e.target.value)}
-                    onBlur={() => handleBlur("email")}
-                    placeholder="seu@email.com"
-                    className={cn(
-                      errors.email && touched.email && "border-[#F31260] focus:border-[#F31260]"
-                    )}
-                  />
-                  {errors.email && touched.email && (
-                    <p className="text-[#F31260] text-sm mt-1">{errors.email}</p>
-                  )}
-                </div>
-
-                <div>
-                  <label className="block text-[#27272A] mb-2 font-medium">Telefone</label>
-                  <Input
-                    type="tel"
-                    value={formData.telefone}
-                    onChange={(e) => handleChange("telefone", e.target.value)}
-                    onBlur={() => handleBlur("telefone")}
-                    placeholder="(00) 00000-0000"
-                    className={cn(
-                      errors.telefone && touched.telefone && "border-[#F31260] focus:border-[#F31260]"
-                    )}
-                  />
-                  {errors.telefone && touched.telefone && (
-                    <p className="text-[#F31260] text-sm mt-1">{errors.telefone}</p>
-                  )}
-                </div>
-
-                <div>
-                  <label className="block text-[#27272A] mb-2 font-medium">Como gostaria de ajudar?</label>
-                  <Textarea
-                    value={formData.mensagem}
-                    onChange={(e) => handleChange("mensagem", e.target.value)}
-                    onBlur={() => handleBlur("mensagem")}
-                    placeholder="Descreva como você gostaria de contribuir com a PROESP..."
-                    rows={4}
-                    className={cn(
-                      errors.mensagem && touched.mensagem && "border-[#F31260] focus:border-[#F31260]"
-                    )}
-                  />
-                  {errors.mensagem && touched.mensagem && (
-                    <p className="text-[#F31260] text-sm mt-1">{errors.mensagem}</p>
-                  )}
-                </div>
-
-                <Button
-                  type="submit"
-                  variant={"default"}
-                  disabled={!isFormValid()}
-                  className={cn(
-                    "w-full py-6 bg-[#12A150] text-lg font-bold rounded-full transition-all duration-300",
-                  )}
-                >
-                  Quero ser voluntário!
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-    </section>
-  )
-}
-
 
 export default function Home() {
   return (
@@ -623,8 +372,36 @@ export default function Home() {
       {/* <DiretoriaSection /> */}
       <ProjectsSection />
       <DonationSection />
-      <VolunteerForm />
+      <Forms />
       <Footer />
     </main>
   )
 }
+function setErrors(newErrors: { nome: any; email: any; telefone: any; mensagem: any }) {
+  throw new Error("Function not implemented.")
+}
+
+function setTouched(arg0: { nome: boolean; email: boolean; telefone: boolean; mensagem: boolean }) {
+  throw new Error("Function not implemented.")
+}
+
+function validateNome(nome: any) {
+  throw new Error("Function not implemented.")
+}
+
+function validateEmail(email: any) {
+  throw new Error("Function not implemented.")
+}
+
+function validateTelefone(telefone: any) {
+  throw new Error("Function not implemented.")
+}
+
+function validateMensagem(mensagem: any) {
+  throw new Error("Function not implemented.")
+}
+
+function isFormValid() {
+  throw new Error("Function not implemented.")
+}
+

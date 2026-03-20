@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next'
+import { Toaster } from "@/components/ui/sonner"
 import './globals.css'
 
 
@@ -24,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={poppins.className}>
+        <Toaster />
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
         {children}
         <Analytics />
