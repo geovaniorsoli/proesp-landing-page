@@ -8,7 +8,7 @@ import { Textarea } from "./ui/textarea"
 import { Button } from "./ui/button"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { toast } from "sonner"
-import { Heart, Send } from "lucide-react"
+import { env } from "process"
 
 const STORAGE_KEY = "volunteer_form_submitted"
 
@@ -132,8 +132,7 @@ export default function VolunteerForm() {
         if (isFormValid()) {
             setIsSubmitting(true)
             try {
-                const res = await fetch("https://formspree.io/f/meernwvw", {
-                    method: "POST",
+                    const res = await fetch(`https://formspree.io/f/${process.env.NEXT_PUBLIC_FORMSPREE_ID}`, {                    method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(formData),
                 })
