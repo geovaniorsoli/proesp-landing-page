@@ -50,7 +50,7 @@ export default function TransparenciaPage() {
 
             {/* Conteúdo da Transparência */}
             <section className="py-20 px-4">
-                <div 
+                <div
                     ref={ref}
                     className={cn(
                         "max-w-5xl mx-auto transition-all duration-1000 ease-out",
@@ -113,13 +113,16 @@ export default function TransparenciaPage() {
                                 <p className="text-sm text-slate-500 mb-6 italic">
                                     "Objetivando educação socioambiental crítica e emancipadora para discutir meio ambiente equilibrado como um direito humano e justiça climática." [cite: 7]
                                 </p>
-                                
-                                <a href="/Proesp.pdf" download> 
-                                <Button className="">
-                                    <FileDown className="w-5 h-5" />
-                                    Baixar Plano de Trabalho
-                                </Button>
-                                </a>
+
+                                <div className="flex justify-center w-full mt-6">
+                                    <a href="/Proesp.pdf" download>
+                                        <Button className="">
+                                            <FileDown className="w-5 h-5" />
+                                            Baixar Plano de Trabalho
+                                        </Button>
+                                    </a>
+
+                                </div>
 
                             </div>
                         </div>
