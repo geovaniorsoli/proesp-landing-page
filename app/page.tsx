@@ -288,7 +288,7 @@ function ProjectItem({ project, isEven }: { project: { title: string; descriptio
 function DonationSection() {
   const [copied, setCopied] = useState(false)
   const { ref, isIntersecting } = useIntersectionObserver()
-  const pixKey = "proesp2019.gmail.com"
+  const pixKey = "proesp2019@gmail.com"
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(pixKey)

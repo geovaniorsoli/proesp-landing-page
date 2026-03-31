@@ -45,6 +45,7 @@ export default function Navbar() {
         { name: "História", id: "história", path: "/Historia" },
         { name: "Estatuto", id: "Estatuto", path: "/Estatuto" },
         { name: "Projetos", id: "projetos", path: "/Projetos" },
+        { name: "Transparência", id: "transparência ", path: "/Transparencia" },
     ]
 
     return (

@@ -141,8 +141,8 @@ export default function estatuto() {
           {/* Botão de Download */}
           <div className="mt-12 text-center">
             <a href="/Estatuto.pdf" download>
-              <Button size="lg" className="text-white px-8 py-7 rounded-2xl text-lg transition-all gap-3">
-                <Download className="w-6 h-6" />
+              <Button className="">
+                <Download className="" />
                 Baixar Estatuto Completo
               </Button>
             </a>
