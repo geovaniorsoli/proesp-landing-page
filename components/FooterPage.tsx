@@ -45,10 +45,10 @@ export default function Footer() {
                         </a>
 
                         <a
-                            href="mailto:proesp2019.gmail.com"
+                            href="mailto:proesp2019@gmail.com"
                             className="text-gray-600 hover:text-[#006FEE] text-sm md:text-base transition-colors flex items-center gap-1 w-fit"
                         >
-                            proesp2019.gmail.com <span className="text-xs">↗</span>
+                            proesp2019@gmail.com <span className="text-xs">↗</span>
                         </a>
                     </div>
 

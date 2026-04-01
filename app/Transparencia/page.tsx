@@ -92,26 +92,26 @@ export default function TransparenciaPage() {
                             <div>
                                 <h2 className="text-2xl font-bold text-slate-900 mb-2">Detalhes da Parceria</h2>
                                 <p className="text-slate-600 leading-relaxed">
-                                    Informações referentes ao Programa Transferegov nº 8100020260012, vinculado ao Ministério dos Direitos Humanos e Cidadania. [cite: 3, 4]
+                                    Informações referentes ao Programa Transferegov nº 8100020260012, vinculado ao Ministério dos Direitos Humanos e Cidadania. cite: 3, 4
                                 </p>
                             </div>
 
                             <div className="grid md:grid-cols-2 gap-8 py-6 border-y border-slate-200">
                                 <div>
                                     <h4 className="font-bold text-slate-900">Instituição Beneficiária</h4>
-                                    <p className="text-slate-600">PROESP - Sociedade Protetora da Diversidade das Espécies [cite: 2]</p>
-                                    <p className="text-slate-600">CNPJ: 50.086.578/0001-80 [cite: 2]</p>
+                                    <p className="text-slate-600">PROESP - Sociedade Protetora da Diversidade das Espécies cite: 2</p>
+                                    <p className="text-slate-600">CNPJ: 50.086.578/0001-80 cite: 2</p>
                                 </div>
                                 <div>
                                     <h4 className="font-bold text-slate-900">Proposta</h4>
-                                    <p className="text-slate-600">Nº 005325/2026 [cite: 5]</p>
-                                    <p className="text-slate-600">Objeto: Promoção de educação não formal e socioambiental em comunidades periféricas. [cite: 7]</p>
+                                    <p className="text-slate-600">Nº 005325/2026 cite: 5</p>
+                                    <p className="text-slate-600">Objeto: Promoção de educação não formal e socioambiental em comunidades periféricas. cite: 7</p>
                                 </div>
                             </div>
 
                             <div className="pt-4">
                                 <p className="text-sm text-slate-500 mb-6 italic">
-                                    "Objetivando educação socioambiental crítica e emancipadora para discutir meio ambiente equilibrado como um direito humano e justiça climática." [cite: 7]
+                                    "Objetivando educação socioambiental crítica e emancipadora para discutir meio ambiente equilibrado como um direito humano e justiça climática." cite: 7
                                 </p>
 
                                 <div className="flex justify-center w-full mt-6">
